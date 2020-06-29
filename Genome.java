@@ -11,19 +11,19 @@ public class Genome {
 	Genome copy;
 	Random rand = new Random();
 	
-	
+	// Initialize the Genome
 	public Genome (double MutationRate){
 		this.MutationRate=MutationRate;
 		this.content.append("A");
-	
 	}
 
 	public Genome (Genome gene){
 		this.content.append(gene.content);	
 	}
-
+	
+	// This is where mutation happens, there are 3 ways of mutations
+	// Insert, Delete or Change the val
 	void mutate() {
-
 		double Mutation=Math.random();
 		int length=this.content.length();
 		
@@ -52,54 +52,31 @@ public class Genome {
 		}
 	}
 
-	void crossover(Genome other) {
-		
+	// This is where cross over happens
+	void crossover(Genome other) {	
 		StringBuilder cross=new StringBuilder(16);
 		int length1=this.content.length();
 		int length2=other.content.length();
 		for (int i=0; i<Math.max(length1,length2);i++){
 			if (rand.nextBoolean()){
 				if (i<length1){
-					cross.append(this.content.charAt(i));
-					
+					cross.append(this.content.charAt(i));				
 				}else {
 					break;
 				}
 			}else {
 				if (i<length2) {
-					cross.append(other.content.charAt(i));
-				
-					
+					cross.append(other.content.charAt(i));	
 				}else {
 					break;
 				}
 			}
 		}
-		this.content=cross;
-		
-		
+		this.content=cross;	
 	}
-	
-	/*Integer fitness() {
-		int n=this.content.length();
-		int m=target.length();
-		int[] D = new int[n+1,m+1];
-		for (int i=1; i<n;i++) {
-			for (int j=1; j<m; j++) {
-				if (this.content.charAt(i-1)==target.charAt(j-1)) {
-					D[i][j]=D[i-1][j-1];
-					
-				}else {
-					D[i][j]=min(D[i-1][j]+1,D[i][j-1]+1, D[i-1][j-1]+1);
-				}
-			}
-		}
-		return D[i][j]=
-		
-	}*/
 
+	// Calculate the fitness rate
 	Integer fitness() {
-
 		int n=this.content.length();
 		int m=target.length();
 		int L=Math.max(n,m);
@@ -121,7 +98,6 @@ public class Genome {
 		}
 		return f;
 	}
-	
 	
 	public String toString() {
 		String whole=this.content.toString()+" "+this.fitness();

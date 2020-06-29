@@ -1,4 +1,3 @@
-//Reference for override sort https://stackoverflow.com/questions/18895915/how-to-sort-an-array-of-objects-in-java
 import java.util.*;
 
 public class Population {
@@ -17,6 +16,7 @@ public class Population {
 		}
 	}
 	
+	// Each day, the population would change
 	void day() {	
 		Collections.sort(list, new Comparator<Genome>(){
 			@Override
@@ -27,15 +27,11 @@ public class Population {
 			
 		//update the mostFit
 		mostFit=list.get(0);
-		
-		//no delete as of this moment to see if can replace
-		
+				
 		Random rand=new Random();
-		int x=rand.nextInt(list.size()/2);	//50
-		for (int i=list.size()/2-1; i<list.size();i++) {	//49
-			
-			Genome temp1=new Genome(list.get(x));
-			
+		int x=rand.nextInt(list.size()/2);
+		for (int i=list.size()/2-1; i<list.size();i++) {
+			Genome temp1=new Genome(list.get(x));	
 			if (rand.nextBoolean()){
 				temp1.mutate();
 			}else {
@@ -50,9 +46,5 @@ public class Population {
 			list.set(i, temp1);
 			x=rand.nextInt(list.size()/2+1);	
 		}		
-	
-	
 	}
-
 }
-	
